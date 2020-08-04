@@ -1,8 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 
-const app = createApp(App);
-app.mount("#app");
+createApp(App).mount('#app')
 
 // Hot Module Replacement (HMR) - Remove this snippet to remove HMR.
 // Learn more: https://www.snowpack.dev/#hot-module-replacement
