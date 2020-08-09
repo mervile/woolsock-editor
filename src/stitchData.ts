@@ -4,22 +4,47 @@ export interface Stitch {
     color: String
 }
 
-export function generateStitches(rowCount: Number, stitchCount: Number, idStart: String, isSleeve: Boolean = false) {
+export interface Row {
+    id: String,
+    stitches: Array<Stitch>,
+    section: Section
+}
+
+export enum Section {
+    SLEEVE = "sleeve",
+    HEEL = "heel",
+    FOOT = "foot",
+    TOES = "toes"
+}
+
+export function createStitches(): Array<Row> {
+    return createRows(20, 24, Section.SLEEVE).concat(
+        createRows(13, 10, Section.HEEL),
+        createRows(1, 9, Section.HEEL, 'curve'),
+        createRows(1, 8, Section.HEEL, 'bottom'),
+        createRows(50, 15, Section.FOOT),
+        createRows(2, 14, Section.TOES),
+        createRows(2, 12, Section.TOES, 'firstDecrease'),
+        createRows(2, 10, Section.TOES, 'secondDecrease'),
+        createRows(2, 8, Section.TOES, 'thirdDecrease'),
+        createRows(2, 6, Section.TOES, 'wrapup'));
+}
+
+function createRows(rowCount: Number, stitchCount: Number, section: Section, extraRowId: String = ''): Array<Row> {
     const rows = [];
     for (let i = 0; i < rowCount; i++) {
         const stitches = [];
         for (let j = 0; j < stitchCount; j++) {
-            if (idStart == 'sleeve') {
-                stitches.push({id: idStart + 'stitch' + j, right: (j % 4 == 0) || ((j-1) % 4 == 0) ? false : true, color: 'blue'});
-            } else if (idStart == 'heel') {
-                stitches.push({id: idStart + 'stitch' + j, right: j % 2 == 0 ? false : true, color: 'blue'})
-            } else {
-                stitches.push({id: idStart + 'stitch' + j, right: true, color: 'blue'})
+            const stitch = {id: `${section}stitch${j}`, color: 'green', right: true};
+            if (section === Section.SLEEVE && (j % 4 == 0) || ((j-1) % 4 == 0)) {
+                stitch.right = false;
+            } else if (section == Section.HEEL && j % 2 == 0) {
+                stitch.right = false;
             }
+            stitches.push(stitch);
         }
-        rows.push({id: idStart + 'row' + i, stitches});
+        rows.push({id: `${section}row${i}${extraRowId}`, section, stitches});
     }
-    console.log(rows);
     return rows;
 }
 
