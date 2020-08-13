@@ -1,3 +1,5 @@
+import {getCurrentColor} from './uiState.ts';
+
 export interface Stitch {
     id: String,
     right: Boolean,
@@ -34,9 +36,11 @@ function createRows(rowCount: Number, stitchCount: Number, section: Section, ext
     const rows = [];
     for (let i = 0; i < rowCount; i++) {
         const stitches = [];
+        //todo unique uuid
+        const color = JSON.stringify(getCurrentColor);
         for (let j = 0; j < stitchCount; j++) {
-            const stitch = {id: `${section}stitch${j}`, color: 'green', right: true};
-            if (section === Section.SLEEVE && (j % 4 == 0) || ((j-1) % 4 == 0)) {
+            const stitch = {id: `${section}stitch${j}`, color: color, right: true};
+            if (section === Section.SLEEVE && ((j % 4 == 0) || ((j-1) % 4 == 0))) {
                 stitch.right = false;
             } else if (section == Section.HEEL && j % 2 == 0) {
                 stitch.right = false;

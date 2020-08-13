@@ -1,21 +1,23 @@
 <template>
   <ul class="foot">
+    <color-setter :callback="changeColor" :title="'Foot'" class="section-color-setter"></color-setter>
     <row v-for="row in rows" :key="row.id" :stitches="row.stitches" :id="row.id"></row>
   </ul>
 </template>
 
 <script>
 import Row from "./Row";
-import { getFoot, changeSectionColor } from "../uiState";
-import { Section } from "../stitchData";
+import ColorSetter from './ColorSetter';
+import { getFoot, changeFootColor } from "../uiState";
 
 export default {
   components: {
     Row,
+    ColorSetter
   },
   methods: {
     changeColor() {
-      changeSectionColor(Section.FOOT);
+      changeFootColor();
     },
   },
   data() {

@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <button @click="changeColor()">changecolor</button>
+    <color-setter :callback="changeColor" :title="'Sleeve'" class="section-color-setter"></color-setter>
     <row
       v-for="row in rows"
       :key="row.id"
@@ -12,16 +12,17 @@
 
 <script>
 import Row from "./Row";
-import { getSleeve, changeSectionColor } from "../uiState";
-import { Section } from "../stitchData";
+import ColorSetter from './ColorSetter';
+import { getSleeve, changeSleeveColor } from "../uiState";
 
 export default {
   components: {
     Row,
+    ColorSetter
   },
   methods: {
     changeColor() {
-      changeSectionColor(Section.SLEEVE);
+      changeSleeveColor();
     },
   },
   data() {
@@ -31,10 +32,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-button {
-  position: absolute;
-  right: -85px;
-}
-</style>

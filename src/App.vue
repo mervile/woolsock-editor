@@ -2,39 +2,21 @@
   <div>
     <h1>Woolsock editor</h1>
 
+    <color-picker></color-picker>
     <div class="socks">
       <sock title="Left foot left side"></sock>
-      <sock title="Left foot right side" dir="rtl"></sock>
     </div>
   </div>
 </template>
 
 <script>
 import Sock from './components/Sock';
-
-
-/*const store = {
-    state: {
-        stitches: createStitches()
-    },
-    mutations: {
-        updateStitch (state, stitchId) {
-            const stitch = state.stitches.find(row => row.find(s => s.id === stitchId));
-            stitch.color = blue;
-        },
-        updateRow (state, rowId) {
-            const row = state.stitches.find(row => row.find(r => r.id === rowId));
-            row = row.map(s => {s.color = 'red'});
-        },
-        updateSection (state, section) {
-            state.stitches[section].map(r => {r.stitches.map(s => {s.color = "white"; return s}); return r})
-        }
-    }
-};*/
+import ColorPicker from './components/ColorPicker';
 
 export default {
   components: {
-    Sock
+    Sock,
+    ColorPicker
   }
 };
 </script>

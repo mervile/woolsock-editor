@@ -1,34 +1,30 @@
 <template>
   <li>
-    <button @click="changeColor()">changerowcolor</button>
+    <color-setter :callback="changeColor"></color-setter>
     <stitch
-      v-for="item in initialStitches"
+      v-for="item in stitches"
       :key="item.id"
       :color="item.color"
       :right="item.right"
       :id="item.id"
-      :row-id="rowId"
+      :row-id="id"
     ></stitch>
   </li>
 </template>
 
 <script>
 import Stitch from "./Stitch";
+import ColorSetter from './ColorSetter';
 import { changeRowColor } from "../uiState";
 
 export default {
   components: {
     Stitch,
+    ColorSetter
   },
   props: {
     stitches: Array,
     id: String,
-  },
-  data() {
-    return {
-      initialStitches: this.stitches,
-      rowId: this.id,
-    };
   },
   methods: {
     changeColor() {
@@ -39,12 +35,6 @@ export default {
 </script>
 
 <style scoped>
-button {
-  visibility: hidden;
-  position: absolute;
-  right: -105px;
-}
-
 li {
   position: relative;
 }
@@ -52,9 +42,5 @@ li {
 li:hover {
   transform: scale(1.05);
   z-index: 1;
-}
-
-li:hover button {
-  visibility: visible;
 }
 </style>
