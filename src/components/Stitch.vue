@@ -23,8 +23,6 @@
 </template>
 
 <script lang="ts">
-import { changeStitchColor } from "../uiState";
-
 export default {
   props: {
     color: String,
@@ -32,9 +30,10 @@ export default {
     id: String,
     rowId: String,
   },
+  inject: ['sockData'],
   methods: {
     changeColor() {
-      changeStitchColor(this.rowId, this.id);
+      this.sockData.changeStitchColor(this.rowId, this.id);
     },
   },
 };

@@ -8,21 +8,21 @@
 <script>
 import Row from "./Row";
 import ColorSetter from './ColorSetter';
-import { getHeel, changeHeelColor } from "../uiState";
 
 export default {
   components: {
     Row,
     ColorSetter
   },
+  inject: ['sockData'],
   methods: {
     changeColor() {
-      changeHeelColor();
+      this.sockData.changeHeelColor();
     },
   },
   data() {
     return {
-      rows: getHeel,
+      rows: this.sockData.getHeel,
     };
   },
 };

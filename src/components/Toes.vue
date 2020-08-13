@@ -8,21 +8,21 @@
 <script>
 import Row from "./Row";
 import ColorSetter from './ColorSetter';
-import { getToes, changeToesColor } from "../uiState";
 
 export default {
   components: {
     Row,
     ColorSetter
   },
+  inject: ['sockData'],
   methods: {
     changeColor() {
-      changeToesColor();
+      this.sockData.changeToesColor();
     },
   },
   data() {
     return {
-      rows: getToes,
+      rows: this.sockData.getToes,
     };
   },
 };

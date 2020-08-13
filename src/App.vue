@@ -4,18 +4,19 @@
 
     <color-picker></color-picker>
     <div class="socks">
-      <sock title="Left foot left side"></sock>
+      <half-a-sock title="Left foot left side"></half-a-sock>
+      <half-a-sock title="Left foot right side"></half-a-sock>
     </div>
   </div>
 </template>
 
 <script>
-import Sock from './components/Sock';
+import HalfASock from './components/HalfASock';
 import ColorPicker from './components/ColorPicker';
 
 export default {
   components: {
-    Sock,
+    HalfASock,
     ColorPicker
   }
 };

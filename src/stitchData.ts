@@ -1,4 +1,4 @@
-import {getCurrentColor} from './uiState.ts';
+import {getCurrentColor} from './colorState.ts';
 
 export interface Stitch {
     id: String,

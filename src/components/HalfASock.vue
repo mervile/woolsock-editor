@@ -16,6 +16,7 @@ import Sleeve from "./Sleeve";
 import Heel from "./Heel";
 import Foot from "./Foot";
 import Toes from "./Toes";
+import HalfaSock from '../HalfaSock';
 
 export default {
   components: {
@@ -27,6 +28,12 @@ export default {
   props: {
     title: String,
   },
+  provide() {
+    const sockData = new HalfaSock();
+    return {
+      sockData
+    }
+  }
 };
 </script>
 

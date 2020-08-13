@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { getCurrentColor, setColor } from '../uiState'
+import { getCurrentColor, setColor } from '../colorState'
 
 export default {
     data() {

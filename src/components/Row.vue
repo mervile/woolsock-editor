@@ -15,20 +15,20 @@
 <script>
 import Stitch from "./Stitch";
 import ColorSetter from './ColorSetter';
-import { changeRowColor } from "../uiState";
 
 export default {
   components: {
     Stitch,
     ColorSetter
   },
+  inject: ['sockData'],
   props: {
     stitches: Array,
     id: String,
   },
   methods: {
     changeColor() {
-      changeRowColor(this.id);
+      this.sockData.changeRowColor(this.id);
     },
   },
 };

@@ -13,21 +13,21 @@
 <script>
 import Row from "./Row";
 import ColorSetter from './ColorSetter';
-import { getSleeve, changeSleeveColor } from "../uiState";
 
 export default {
   components: {
     Row,
     ColorSetter
   },
+  inject: ['sockData'],
   methods: {
     changeColor() {
-      changeSleeveColor();
+      this.sockData.changeSleeveColor();
     },
   },
   data() {
     return {
-      rows: getSleeve,
+      rows: this.sockData.getSleeve,
     };
   }
 };
