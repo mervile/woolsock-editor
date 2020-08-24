@@ -12,7 +12,7 @@ class HalfaSock {
         this.state = ref(createStitches());
     }
 
-    private changeSectionColor(section: Section) {
+    protected changeSectionColor(section: Section) {
         this.findRowsBySection(section).forEach((r: Row) => {
             this.changeRowStitchesColor(r)
         });

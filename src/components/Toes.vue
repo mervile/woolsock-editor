@@ -1,7 +1,13 @@
 <template>
   <ul class="toes">
     <color-setter :callback="changeColor" :title="'Toes'" class="section-color-setter"></color-setter>
-    <row v-for="row in rows" :key="row.id" :stitches="row.stitches" :id="row.id"></row>
+    <row
+      v-for="row in rows"
+      :key="row.id"
+      :stitches="row.stitches"
+      :id="row.id"
+      @row-color-changed="onRowColorChange"
+    ></row>
   </ul>
 </template>
 
@@ -15,10 +21,15 @@ export default {
     ColorSetter
   },
   inject: ['sockData'],
+  emits: ['toes-color-changed', 'row-color-changed'],
   methods: {
     changeColor() {
       this.sockData.changeToesColor();
+      this.$emit('toes-color-changed');
     },
+    onRowColorChange(id) {
+      this.$emit('row-color-changed', id);
+    }
   },
   data() {
     return {

@@ -1,24 +1,35 @@
 <template>
   <ul class="foot">
     <color-setter :callback="changeColor" :title="'Foot'" class="section-color-setter"></color-setter>
-    <row v-for="row in rows" :key="row.id" :stitches="row.stitches" :id="row.id"></row>
+    <row
+      v-for="row in rows"
+      :key="row.id"
+      :stitches="row.stitches"
+      :id="row.id"
+      @row-color-changed="onRowColorChange"
+    ></row>
   </ul>
 </template>
 
 <script>
 import Row from "./Row";
-import ColorSetter from './ColorSetter';
+import ColorSetter from "./ColorSetter";
 
 export default {
   components: {
     Row,
-    ColorSetter
+    ColorSetter,
   },
-  inject: ['sockData'],
+  inject: ["sockData"],
+  emits: ["foot-color-changed", 'row-color-changed'],
   methods: {
     changeColor() {
       this.sockData.changeFootColor();
+      this.$emit("foot-color-changed");
     },
+    onRowColorChange(id) {
+      this.$emit('row-color-changed', id);
+    }
   },
   data() {
     return {

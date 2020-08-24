@@ -6,6 +6,7 @@
       :key="row.id"
       :stitches="row.stitches"
       :id="row.id"
+      @row-color-changed="onRowColorChange"
     ></row>
   </ul>
 </template>
@@ -20,10 +21,15 @@ export default {
     ColorSetter
   },
   inject: ['sockData'],
+  emits: ['sleeve-color-changed', 'row-color-changed'],
   methods: {
     changeColor() {
       this.sockData.changeSleeveColor();
+      this.$emit('sleeve-color-changed');
     },
+    onRowColorChange(id) {
+      this.$emit('row-color-changed', id);
+    }
   },
   data() {
     return {

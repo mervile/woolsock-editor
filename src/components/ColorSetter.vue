@@ -27,7 +27,7 @@ button {
   position: absolute;
   z-index: 1;
   width: 65px;
-  right: -65px;
+  right: -60px;
   padding: 2px 5px 2px 2px;
 }
 
@@ -41,7 +41,7 @@ li:hover button, ul:hover .section-color-setter {
 }
 
 .section-color-setter {
-  top: -60px;
+  top: -50px;
   right: 0px;
 }
 

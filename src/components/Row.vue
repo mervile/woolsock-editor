@@ -22,6 +22,7 @@ export default {
     ColorSetter
   },
   inject: ['sockData'],
+  emits: ['row-color-changed'],
   props: {
     stitches: Array,
     id: String,
@@ -29,6 +30,7 @@ export default {
   methods: {
     changeColor() {
       this.sockData.changeRowColor(this.id);
+      this.$emit('row-color-changed', this.id);
     },
   },
 };
