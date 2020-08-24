@@ -11,6 +11,7 @@
       :sock-data="rightSide"
       @section-color-changed="syncSectionChangeWithLeftSide"
       @row-color-changed="syncRowChangeWithLeftSide"
+      v-if="showRightSide"
     ></half-a-sock>
   </div>
 </template>
@@ -19,6 +20,7 @@
 import HalfASock from "./HalfASock.vue";
 import Sock from "../Sock";
 import { Section } from "../stitchData";
+import { getRightSideVisibilityState } from '../visibilityState';
 
 export default {
   components: {
@@ -29,6 +31,7 @@ export default {
     return {
       leftSide: s.getLeftSide,
       rightSide: s.getRightSide,
+      showRightSide: getRightSideVisibilityState
     };
   },
   methods: {

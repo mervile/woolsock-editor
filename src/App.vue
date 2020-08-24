@@ -3,6 +3,7 @@
     <h1>Woolsock editor</h1>
 
     <color-picker></color-picker>
+    <visibility-toggle></visibility-toggle>
     <div class="socks">
       <sock></sock>
     </div>
@@ -12,11 +13,13 @@
 <script>
 import Sock from './components/Sock';
 import ColorPicker from './components/ColorPicker';
+import VisibilityToggle from './components/VisibilityToggle';
 
 export default {
   components: {
     Sock,
-    ColorPicker
+    ColorPicker,
+    VisibilityToggle
   }
 };
 </script>
