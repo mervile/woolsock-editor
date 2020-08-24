@@ -21,6 +21,7 @@ import HalfASock from "./HalfASock.vue";
 import Sock from "../Sock";
 import { Section } from "../stitchData";
 import { getRightSideVisibilityState } from '../visibilityState';
+import { isSyncingChanges } from '../syncChangesState';
 
 export default {
   components: {
@@ -36,16 +37,24 @@ export default {
   },
   methods: {
     syncSectionChangeWithRightSide(section) {
-      this.rightSide.changeSectionColor(section);
+      if (isSyncingChanges()) {
+        this.rightSide.changeSectionColor(section);
+      }
     },
     syncSectionChangeWithLeftSide(section) {
-      this.leftSide.changeSectionColor(section);
+      if (isSyncingChanges()) {
+        this.leftSide.changeSectionColor(section);
+      }
     },
     syncRowChangeWithRightSide(id) {
-      this.rightSide.changeRowColor(id);
+      if (isSyncingChanges()) {
+        this.rightSide.changeRowColor(id);
+      }
     },
     syncRowChangeWithLeftSide(id) {
-      this.leftSide.changeRowColor(id);
+      if (isSyncingChanges()) {
+        this.leftSide.changeRowColor(id);
+      }
     }
   },
 };
