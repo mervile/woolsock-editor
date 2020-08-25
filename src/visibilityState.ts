@@ -5,11 +5,20 @@ function toggleRightSideVisibilityState() {
     visibilityState.value.showRightSide = !visibilityState.value.showRightSide;
 }
 
-const getRightSideVisibilityState = computed(() => visibilityState.value.showRightSide);
+function toggleRightFootVisibilityState() {
+    console.log('toggleRightFootVisibility');
+    visibilityState.value.showRightFoot = !visibilityState.value.showRightFoot;
+}
 
-const visibilityState = ref({showRightSide: false});
+
+const getRightSideVisibilityState = computed(() => visibilityState.value.showRightSide);
+const getRightFootVisibilityState = computed(() => visibilityState.value.showRightFoot);
+
+const visibilityState = ref({showRightSide: false, showRightFoot: false});
 
 export {
     getRightSideVisibilityState,
-    toggleRightSideVisibilityState
+    toggleRightSideVisibilityState,
+    getRightFootVisibilityState,
+    toggleRightFootVisibilityState
 }

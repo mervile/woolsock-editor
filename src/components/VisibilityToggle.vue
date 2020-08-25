@@ -7,21 +7,32 @@
             v-model="showRightSide"
             @change="toggleRightSideVisibility"
         />
+        <label for="show-right-foot-toggle">Show right foot</label>
+        <input
+            type="checkbox"
+            name="show-right-foot-toggle"
+            v-model="showRightFoot"
+            @change="toggleRightFootVisibility"
+        />
     </div>
 </template>
 
 <script>
-import { getRightSideVisibilityState, toggleRightSideVisibilityState } from '../visibilityState';
+import * as v from '../visibilityState';
 
 export default {
     data() {
         return {
-            showRightSide: getRightSideVisibilityState
+            showRightSide: v.getRightSideVisibilityState,
+            showRightFoot: v.getRightFootVisibilityState
         }
     },
     methods: {
         toggleRightSideVisibility() {
-            toggleRightSideVisibilityState();
+            v.toggleRightSideVisibilityState();
+        },
+        toggleRightFootVisibility() {
+            v.toggleRightFootVisibilityState();
         }
     }
 }

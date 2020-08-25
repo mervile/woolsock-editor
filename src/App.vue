@@ -9,7 +9,19 @@
     <sync-changes-toggle></sync-changes-toggle>
 
     <div class="socks">
-      <sock></sock>
+      <sock
+        :title="'Left foot'"
+        :sock-data="leftFoot"
+        @section-color-changed="syncSectionChangeWithRightFoot"
+        @row-color-changed="syncRowChangeWithRightFoot"
+      ></sock>
+      <sock
+        v-if="showRightFoot"
+        :title="'Right foot'"
+        :sock-data="rightFoot"
+        @section-color-changed="syncSectionChangeWithLeftFoot"
+        @row-color-changed="syncRowChangeWithLeftFoot"
+      ></sock>
     </div>
   </div>
 </template>
@@ -19,6 +31,8 @@ import Sock from './components/Sock';
 import ColorPicker from './components/ColorPicker';
 import VisibilityToggle from './components/VisibilityToggle';
 import SyncChangesToggle from './components/SyncChangesToggle';
+import SockModel from './Sock';
+import { getRightFootVisibilityState } from './visibilityState';
 
 export default {
   components: {
@@ -26,6 +40,31 @@ export default {
     ColorPicker,
     VisibilityToggle,
     SyncChangesToggle
+  },
+  data() {
+    return {
+      leftFoot: new SockModel(),
+      rightFoot: new SockModel(),
+      showRightFoot: getRightFootVisibilityState
+    }
+  },
+  methods: {
+    syncSectionChangeWithRightFoot(section) {
+      this.rightFoot.getLeftSide.changeSectionColor(section);
+      this.rightFoot.getRightSide.changeSectionColor(section);
+    },
+    syncSectionChangeWithLeftFoot(section) {
+      this.leftFoot.getLeftSide.changeSectionColor(section);
+      this.leftFoot.getRightSide.changeSectionColor(section);
+    },
+    syncRowChangeWithRightFoot(id) {
+      this.rightFoot.getLeftSide.changeRowColor(id);
+      this.rightFoot.getRightSide.changeRowColor(id);
+    },
+    syncRowChangeWithLeftFoot(id) {
+      this.leftFoot.getLeftSide.changeRowColor(id);
+      this.rightFoot.getRightSide.changeRowColor(id);
+    }
   }
 };
 </script>
@@ -35,9 +74,5 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
-}
-
-[dir="rtl"] ::v-deep(.foot .stitch), [dir="rtl"] ::v-deep(.toes .stitch) {
-    transform: rotate(90deg);
 }
 </style>
