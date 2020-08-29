@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue';
 
-function setColor(color: String) {
+function setColor(color: string) {
     console.log('setColor', color);
     colorState.value.currentColor = color;
 }
@@ -8,7 +8,7 @@ function setColor(color: String) {
 const getCurrentColor = computed(() => colorState.value.currentColor);
 const getCurrentColorValue = () => colorState.value.currentColor;
 
-const colorState = ref({currentColor: '#000000'});
+const colorState = ref({currentColor: '#FFFFFF'});
 
 export {
     getCurrentColor,

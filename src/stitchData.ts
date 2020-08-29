@@ -1,4 +1,4 @@
-import {getCurrentColor} from './colorState.ts';
+import {getCurrentColorValue} from './colorState.ts';
 
 export interface Stitch {
     id: String,
@@ -37,7 +37,7 @@ function createRows(rowCount: Number, stitchCount: Number, section: Section, ext
     for (let i = 0; i < rowCount; i++) {
         const stitches = [];
         //todo unique uuid
-        const color = JSON.stringify(getCurrentColor);
+        const color = getCurrentColorValue();
         for (let j = 0; j < stitchCount; j++) {
             const stitch = {id: `${section}stitch${j}`, color: color, right: true};
             if (section === Section.SLEEVE && ((j % 4 == 0) || ((j-1) % 4 == 0))) {

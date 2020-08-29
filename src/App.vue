@@ -8,6 +8,10 @@
 
     <sync-changes-toggle></sync-changes-toggle>
 
+    <add-yarn-modal></add-yarn-modal>
+
+    <yarn-list></yarn-list>
+
     <div class="socks">
       <sock
         :title="'Left foot'"
@@ -31,6 +35,8 @@ import Sock from './components/Sock';
 import ColorPicker from './components/ColorPicker';
 import VisibilityToggle from './components/VisibilityToggle';
 import SyncChangesToggle from './components/SyncChangesToggle';
+import AddYarnModal from './components/AddYarnModal';
+import YarnList from './components/YarnList';
 import SockModel from './Sock';
 import { getRightFootVisibilityState } from './visibilityState';
 
@@ -39,7 +45,9 @@ export default {
     Sock,
     ColorPicker,
     VisibilityToggle,
-    SyncChangesToggle
+    SyncChangesToggle,
+    AddYarnModal,
+    YarnList
   },
   data() {
     return {
