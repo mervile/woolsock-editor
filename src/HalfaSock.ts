@@ -1,15 +1,13 @@
-import { ref, computed, Ref } from 'vue';
+import { Stitch, Row, Section, createStitches } from './stitchData';
+import { getCurrentColorValue } from './colorState';
+import { getSelectedYarn } from './yarnsState';
 
-import { Stitch, Row, Section } from './stitchData.ts';
-import { createStitches } from './stitchData.ts';
-import { getCurrentColorValue } from './colorState.ts';
+export class HalfaSock {
 
-class HalfaSock {
-
-    private state: Ref<Array<Row>>
+    private stitches: Array<Row>;
 
     constructor() {
-        this.state = ref(createStitches());
+        this.stitches = createStitches();
     }
 
     protected changeSectionColor(section: Section) {
@@ -20,16 +18,18 @@ class HalfaSock {
     
     private changeRowStitchesColor(row: Row) {
         row.stitches.forEach((stitch: Stitch) => {
-            stitch.color = getCurrentColorValue();
+            this.updateStitch(stitch);
         });
     }
         
     private findRow(rowId: String) {
-        return this.state.value.find((r: Row) => r.id === rowId);
+        return this.stitches.find((r: Row) => {
+            return r.id === rowId
+        });
     }
     
     private findRowsBySection(section: Section) {
-        return this.state.value.filter((r: Row) => r.section === section);
+        return this.stitches.filter((r: Row) => r.section === section);
     }
 
     private findStitch(rowId: String, stitchId: String) {
@@ -41,8 +41,14 @@ class HalfaSock {
         return null;
     }
 
-    changeRowColor(rowId: String) {
-        const row = this.findRow(rowId);
+    private updateStitch(stitch: Stitch) {
+        stitch.color = getCurrentColorValue();
+        stitch.yarnId = getSelectedYarn.value.id;
+    }
+
+    changeRowColor(section: Section, number: number) {
+        const rows = this.findRowsBySection(section);
+        const row = rows.find((r: Row) => r.number === number);
         if (row) {
             this.changeRowStitchesColor(row);
         }
@@ -50,7 +56,7 @@ class HalfaSock {
     
     changeStitchColor(rowId: String, stitchId: String) {
         const stitch = this.findStitch(rowId, stitchId);
-        stitch.color = getCurrentColorValue();
+        this.updateStitch(stitch);
     }
     
     changeSleeveColor() {
@@ -69,11 +75,28 @@ class HalfaSock {
         this.changeSectionColor(Section.TOES);
     }
     
-    getSleeve = computed(() => this.findRowsBySection(Section.SLEEVE));
-    getHeel = computed(() => this.findRowsBySection(Section.HEEL));
-    getFoot = computed(() => this.findRowsBySection(Section.FOOT));
-    getToes = computed(() => this.findRowsBySection(Section.TOES));
+    getSleeve() {
+        return this.findRowsBySection(Section.SLEEVE);
+    }
+
+    getHeel() {
+        return this.findRowsBySection(Section.HEEL);
+    }
+
+    getFoot() {
+        return this.findRowsBySection(Section.FOOT);
+    }
+
+    getToes() {
+        return this.findRowsBySection(Section.TOES);
+    }
+
+    getStitchCountForYarn(yarnId: string): number {
+        let count = 0;
+        this.stitches.filter(row => {
+            const stitches = row.stitches.filter(s => s.yarnId && s.yarnId === yarnId);
+            count = count + stitches.length;
+        });
+        return count;
+    };
 }
-
-export default HalfaSock;
-

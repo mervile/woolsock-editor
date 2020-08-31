@@ -2,8 +2,6 @@
   <div>
     <h1>Woolsock editor</h1>
 
-    <color-picker></color-picker>
-
     <visibility-toggle></visibility-toggle>
 
     <sync-changes-toggle></sync-changes-toggle>
@@ -32,18 +30,16 @@
 
 <script>
 import Sock from './components/Sock';
-import ColorPicker from './components/ColorPicker';
 import VisibilityToggle from './components/VisibilityToggle';
 import SyncChangesToggle from './components/SyncChangesToggle';
 import AddYarnModal from './components/AddYarnModal';
 import YarnList from './components/YarnList';
-import SockModel from './Sock';
 import { getRightFootVisibilityState } from './visibilityState';
+import { getLeftFoot, getRightFoot } from './socksState';
 
 export default {
   components: {
     Sock,
-    ColorPicker,
     VisibilityToggle,
     SyncChangesToggle,
     AddYarnModal,
@@ -51,27 +47,27 @@ export default {
   },
   data() {
     return {
-      leftFoot: new SockModel(),
-      rightFoot: new SockModel(),
+      leftFoot: getLeftFoot,
+      rightFoot: getRightFoot,
       showRightFoot: getRightFootVisibilityState
     }
   },
   methods: {
     syncSectionChangeWithRightFoot(section) {
-      this.rightFoot.getLeftSide.changeSectionColor(section);
-      this.rightFoot.getRightSide.changeSectionColor(section);
+      this.rightFoot.leftSide.changeSectionColor(section);
+      this.rightFoot.rightSide.changeSectionColor(section);
     },
     syncSectionChangeWithLeftFoot(section) {
-      this.leftFoot.getLeftSide.changeSectionColor(section);
-      this.leftFoot.getRightSide.changeSectionColor(section);
+      this.leftFoot.leftSide.changeSectionColor(section);
+      this.leftFoot.rightSide.changeSectionColor(section);
     },
-    syncRowChangeWithRightFoot(id) {
-      this.rightFoot.getLeftSide.changeRowColor(id);
-      this.rightFoot.getRightSide.changeRowColor(id);
+    syncRowChangeWithRightFoot(section, number) {
+      this.rightFoot.leftSide.changeRowColor(section, number);
+      this.rightFoot.rightSide.changeRowColor(section, number);
     },
-    syncRowChangeWithLeftFoot(id) {
-      this.leftFoot.getLeftSide.changeRowColor(id);
-      this.rightFoot.getRightSide.changeRowColor(id);
+    syncRowChangeWithLeftFoot(section, number) {
+      this.leftFoot.leftSide.changeRowColor(section, number);
+      this.leftFoot.rightSide.changeRowColor(section, number);
     }
   }
 };

@@ -4,8 +4,7 @@
     <row 
       v-for="row in rows"
       :key="row.id"
-      :stitches="row.stitches"
-      :id="row.id"
+      :row="row"
       @row-color-changed="onRowColorChange"
     ></row>
   </ul>
@@ -27,13 +26,13 @@ export default {
       this.sockData.changeHeelColor();
       this.$emit("heel-color-changed");
     },
-    onRowColorChange(id) {
-      this.$emit('row-color-changed', id);
+    onRowColorChange(section, number) {
+      this.$emit('row-color-changed', section, number);
     }
   },
   data() {
     return {
-      rows: this.sockData.getHeel,
+      rows: this.sockData.getHeel(),
     };
   },
 };

@@ -21,11 +21,9 @@
 import * as v from '../visibilityState';
 
 export default {
-    data() {
-        return {
-            showRightSide: v.getRightSideVisibilityState,
-            showRightFoot: v.getRightFootVisibilityState
-        }
+    computed: {
+        showRightSide() { return v.getRightSideVisibilityState },
+        showRightFoot() { return v.getRightFootVisibilityState }
     },
     methods: {
         toggleRightSideVisibility() {

@@ -31,7 +31,7 @@ import Sleeve from "./Sleeve";
 import Heel from "./Heel";
 import Foot from "./Foot";
 import Toes from "./Toes";
-import HalfaSock from "../HalfaSock";
+import {HalfaSock} from "../HalfaSock";
 import { Section } from "../stitchData";
 
 export default {
@@ -43,9 +43,9 @@ export default {
   },
   props: {
     title: String,
-    sockData: Object,
+    sockData: HalfaSock,
   },
-  emits: ["section-color-changed"],
+  emits: ["section-color-changed", "row-color-changed"],
   methods: {
     onSleeveColorChanged() {
       this.$emit("section-color-changed", Section.SLEEVE);
@@ -59,8 +59,8 @@ export default {
     onToesColorChanged() {
       this.$emit("section-color-changed", Section.TOES);
     },
-    onRowColorChanged(id) {
-      this.$emit("row-color-changed", id);
+    onRowColorChanged(section, number) {
+      this.$emit("row-color-changed", section, number);
     }
   },
   provide() {

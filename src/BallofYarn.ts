@@ -2,14 +2,19 @@ import { v4 as uuidv4 } from 'uuid';
 
 export class BallofYarn {
 
-    private weight: Number;
-    private color: String;
-    private id: String;
+    private weight: number;
+    private color: string;
+    private _id: string;
+    private stitchLimit: number = 10;  // the number of stitches that make up 1g.
 
-    constructor(weight: Number, color: String) {
-        this.id = uuidv4();
+    constructor(weight: number, color: string) {
+        this._id = uuidv4();
         this.weight = weight;
         this.color = color;
+    }
+
+    get id() {
+        return this._id;
     }
 
     /**
@@ -18,18 +23,11 @@ export class BallofYarn {
      * 
      * TODO how many stitches makes 1 g?
      * 
-     * @param count stitchCount 
+     * @param count total number of stitches sewn with this yarn 
      */
-    decreaseWeight(count: Number) {
-    }
-
-    /**
-     * Restore yarn to ball of yarn based on number
-     * of stitches given.
-     * 
-     * @param count stitchCount
-     */
-    restoreWeight(count: Number) {
-
+    calculateWeight(count: number) {
+        if (count >= this.stitchLimit) {
+            this.weight = this.weight - (count / this.stitchLimit);
+        }
     }
 }

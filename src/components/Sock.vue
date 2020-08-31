@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import HalfASock from "./HalfASock.vue";
-import Sock from "../Sock";
+import {Sock} from "../Sock";
 import { Section } from "../stitchData";
 import { getRightSideVisibilityState } from '../visibilityState';
 import { isSyncingChanges } from '../syncChangesState';
@@ -34,12 +34,10 @@ export default {
   },
   data() {
     return {
-      showRightSide: getRightSideVisibilityState
+      showRightSide: getRightSideVisibilityState,
+      leftSide: this.sockData.leftSide,
+      rightSide: this.sockData.rightSide
     };
-  },
-  computed: {
-    leftSide() { return this.sockData.getLeftSide },
-    rightSide() { return this.sockData.getRightSide },
   },
   emits: ['section-color-changed', 'row-color-changed'],
   methods: {
@@ -55,16 +53,16 @@ export default {
         this.$emit('section-color-changed', section);
       }
     },
-    syncRowChangeWithRightSide(id) {
+    syncRowChangeWithRightSide(section, number) {
       if (isSyncingChanges()) {
-        this.rightSide.changeRowColor(id);
-        this.$emit('row-color-changed', id);
+        this.rightSide.changeRowColor(section, number);
+        this.$emit('row-color-changed', section, number);
       }
     },
-    syncRowChangeWithLeftSide(id) {
+    syncRowChangeWithLeftSide(section, number) {
       if (isSyncingChanges()) {
-        this.leftSide.changeRowColor(id);
-        this.$emit('row-color-changed', id);
+        this.leftSide.changeRowColor(section, number);
+        this.$emit('row-color-changed', section, number);
       }
     }
   },

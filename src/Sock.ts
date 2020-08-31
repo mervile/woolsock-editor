@@ -1,7 +1,6 @@
-import HalfaSock from "./HalfaSock.ts";
-import { computed } from 'vue';
+import {HalfaSock} from "./HalfaSock";
 
-class Sock {
+export class Sock {
 
     private _leftSide: HalfaSock;
     private _rightSide: HalfaSock;
@@ -11,8 +10,11 @@ class Sock {
         this._rightSide = new HalfaSock();
     }
 
-    getLeftSide = computed(() => this._leftSide);
-    getRightSide = computed(() => this._rightSide);
-}
+    get leftSide() {
+        return this._leftSide;
+    }
 
-export default Sock;
+    get rightSide() {
+        return this._rightSide;
+    }
+}

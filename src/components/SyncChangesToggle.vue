@@ -14,10 +14,8 @@
 import { getSyncChangesState, toggleSyncChangesState } from '../syncChangesState';
 
 export default {
-    data() {
-        return {
-            syncChanges: getSyncChangesState
-        }
+    computed: {
+        syncChanges() { return getSyncChangesState }
     },
     methods: {
         toggleSyncChanges() {

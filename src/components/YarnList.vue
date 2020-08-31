@@ -27,6 +27,10 @@ export default {
         select(yarnId) {
             selectYarn(yarnId);
         }
+    },
+    computed: {
+        getYarnWeight(yarn) {
+        }
     }
 }
 </script>

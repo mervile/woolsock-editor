@@ -2,12 +2,12 @@
   <li>
     <color-setter :callback="changeColor"></color-setter>
     <stitch
-      v-for="item in stitches"
+      v-for="item in row.stitches"
       :key="item.id"
       :color="item.color"
       :right="item.right"
       :id="item.id"
-      :row-id="id"
+      :row-id="row.id"
     ></stitch>
   </li>
 </template>
@@ -24,13 +24,12 @@ export default {
   inject: ['sockData'],
   emits: ['row-color-changed'],
   props: {
-    stitches: Array,
-    id: String,
+    row: Object,
   },
   methods: {
     changeColor() {
-      this.sockData.changeRowColor(this.id);
-      this.$emit('row-color-changed', this.id);
+      this.sockData.changeRowColor(this.row.section, this.row.number);
+      this.$emit('row-color-changed', this.row.section, this.row.number);
     },
   },
 };
