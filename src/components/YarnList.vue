@@ -8,13 +8,14 @@
             <svg height="80" width="80">
                 <circle cx="40" cy="40" r="30" stroke="black" stroke-width="3" :fill="yarn.color" />
             </svg>
-            <p>{{yarn.weight}}g</p>
+            <p>{{getYarnWeight(yarn)}}g</p>
         </li>
     </ul>
 </template>
 
 <script>
 import { getBallsofYarn, selectYarn, getSelectedYarn } from '../yarnsState'
+import { getStitchCountByYarn } from '../socksState';
 
 export default {
     data() {
@@ -26,10 +27,14 @@ export default {
     methods: {
         select(yarnId) {
             selectYarn(yarnId);
-        }
-    },
-    computed: {
+        },
         getYarnWeight(yarn) {
+            let weight = yarn.weight;
+            let stitchCount = getStitchCountByYarn(yarn.id)
+            if (stitchCount >= yarn.stitchLimit) {
+                weight = weight - (stitchCount / yarn.stitchLimit);
+            }
+            return Math.round(weight);
         }
     }
 }

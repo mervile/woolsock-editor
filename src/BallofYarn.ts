@@ -16,18 +16,4 @@ export class BallofYarn {
     get id() {
         return this._id;
     }
-
-    /**
-     * Decrease weight based on number of stitches
-     * given.
-     * 
-     * TODO how many stitches makes 1 g?
-     * 
-     * @param count total number of stitches sewn with this yarn 
-     */
-    calculateWeight(count: number) {
-        if (count >= this.stitchLimit) {
-            this.weight = this.weight - (count / this.stitchLimit);
-        }
-    }
 }
