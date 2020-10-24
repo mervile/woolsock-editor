@@ -27,7 +27,7 @@ button {
   position: absolute;
   z-index: 1;
   width: 65px;
-  right: -60px;
+  top: -23px;
   padding: 2px 5px 2px 2px;
 }
 

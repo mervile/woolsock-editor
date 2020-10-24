@@ -3,11 +3,14 @@ import {BallofYarn} from './BallofYarn';
 import { setColor } from './colorState';
 
 const yarnsState = ref({list: [], selected: null});
+const yarnId = addBallofYarn('#FFFFFF', 0);
+selectYarn(yarnId);
 
 function addBallofYarn(color, weight) {
     const yarn = new BallofYarn(weight, color);
     yarnsState.value.list.push(yarn);
     console.log(yarnsState);
+    return yarn.id;
 }
 
 function selectYarn(yarnId) {

@@ -90,7 +90,7 @@ export default {
 
 .sock-container {
   display: grid;
-  grid-template-columns: 155px 210px 545px 150px;
+  grid-template-columns: 180px 268px 545px 150px;
   grid-template-rows: auto;
   grid-template-areas:
     "sleeve sleeve . ."

@@ -5,7 +5,7 @@ export class BallofYarn {
     private weight: number;
     private color: string;
     private _id: string;
-    private stitchLimit: number = 10;  // the number of stitches that make up 1g.
+    private stitchLimit: number = 50;  // the number of stitches that make up 1g.
 
     constructor(weight: number, color: string) {
         this._id = uuidv4();

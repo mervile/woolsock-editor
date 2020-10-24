@@ -1,5 +1,6 @@
 import {getCurrentColorValue} from './colorState';
 import { v4 as uuidv4 } from 'uuid';
+import { getSelectedYarn } from './yarnsState';
 
 export interface Stitch {
     id: String,
@@ -21,27 +22,34 @@ export enum Section {
     FOOT = "foot",
     TOES = "toes"
 }
-
+// TODO more realistic stitch count + yarn weight calc should consider sync changes
+// TODO + stitches without yarn should be marked somehow
 export function createStitches(): Array<Row> {
     return createRows(20, 24, Section.SLEEVE).concat(
-        createRows(13, 10, Section.HEEL),
-        createRows(1, 9, Section.HEEL),
-        createRows(1, 8, Section.HEEL),
-        createRows(50, 15, Section.FOOT),
-        createRows(2, 14, Section.TOES),
-        createRows(2, 12, Section.TOES),
-        createRows(2, 10, Section.TOES),
-        createRows(2, 8, Section.TOES),
-        createRows(2, 6, Section.TOES));
+        createRows(22, 12, Section.HEEL),
+        createRows(1, 11, Section.HEEL, 22),
+        createRows(1, 10, Section.HEEL, 23),
+        createRows(54, 24, Section.FOOT),
+        createRows(2, 22, Section.TOES),
+        createRows(2, 20, Section.TOES, 2),
+        createRows(2, 18, Section.TOES, 4),
+        createRows(2, 16, Section.TOES, 6),
+        createRows(2, 12, Section.TOES, 8),
+        createRows(2, 10, Section.TOES, 10),
+        createRows(2, 8, Section.TOES, 12),
+        createRows(2, 6, Section.TOES, 14));
 }
 
-function createRows(rowCount: Number, stitchCount: Number, section: Section): Array<Row> {
+function createRows(rowCount: number, stitchCount: number, section: Section, rowStartIndx?: number): Array<Row> {
     const rows = [];
-    for (let i = 0; i < rowCount; i++) {
+    let i = rowStartIndx ? rowStartIndx : 0;
+    rowCount = rowStartIndx ? (rowCount + rowStartIndx) : rowCount;
+    for (i; i < rowCount; i++) {
         const stitches = [];
         const color = getCurrentColorValue();
+        const yarnId = getSelectedYarn.value.id
         for (let j = 0; j < stitchCount; j++) {
-            const stitch = {id: uuidv4(), color: color, right: true};
+            const stitch = {id: uuidv4(), color, right: true, yarnId};
             if (section === Section.SLEEVE && ((j % 4 == 0) || ((j-1) % 4 == 0))) {
                 stitch.right = false;
             } else if (section == Section.HEEL && j % 2 == 0) {
